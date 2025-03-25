@@ -83,14 +83,46 @@ fn main() {
         .unwrap();
 
     
-    let filered = PageOrdering::filter_by_existance(&pages, &first_update);
-    assert_eq!(&filered.len(), &pages.len());
-    dbg!(filered);
-    dbg!(first_update);
+    let filtered = PageOrdering::filter_by_existance(&pages, &first_update);
+
+    assert_ne!(&filtered.len(), &pages.len());
+    println!("Correct i guess assuming that they wont be the same, usually?");
+
+    // Loop for each num in update
+    // filter out pages where num.left == num
+    // store that filter as a subset
+    // Check if next values in update are less than subset[i].right
+    // If last and no rule broken then it's valid
+    
+    for _ in 0..first_update.elem.len() {
+        let mut update = first_update.elem.iter();
+        let num = update.next();
+        let next = update.next();
+
+        let subset: Vec<_> = filtered
+            .iter()
+            .filter(|page| page.left == *num.unwrap() && first_update.elem.contains(&page.right))
+            .collect();
+
+        while next.is_some() {
+            if num.unwrap()
+            
+        }
+        dbg!(&subset);
+
+    }
+
+    // dbg!(filered);
+    // dbg!(first_update);
 
     // dbg!(pages);
     // dbg!(updates);
 
+}
+
+
+fn check_correct_page(pair: &PageOrdering, update: &Update,  num: u32) -> bool {
+    pair.left !=  num && update.elem.contains(&num)
 }
 
 fn parse_pages(input: &str) -> Vec<PageOrdering> {
