@@ -102,6 +102,24 @@ int countAllWords(char matrix[ROWS][COLS], int rows, int cols, const char *words
     return totalOccurrences;
 }
 
+void part1(char matrix[ROWS][COLS])
+{
+    const char *words[] = {"XMAS"};
+    int wordCount = sizeof(words) / sizeof(words[0]);
+
+    int totalOccurrences = countAllWords(matrix, ROWS, COLS, words, wordCount);
+    printf("Total occurrences of all words: %d\n", totalOccurrences);
+}
+
+void part2(char matrix[ROWS][COLS])
+{
+    const char *words[] = {"MAS"};
+    int wordCount = sizeof(words) / sizeof(words[0]);
+
+    int totalOccurrences = countAllWords(matrix, ROWS, COLS, words, wordCount);
+    printf("Total occurrences of all words: %d\n", totalOccurrences);
+}
+
 int main() {
     char matrix[ROWS][COLS];
 
@@ -111,11 +129,8 @@ int main() {
         return 1;
     }
 
-    const char *words[] = {"XMAS"};
-    int wordCount = sizeof(words) / sizeof(words[0]);
+    part1(matrix);
 
-    int totalOccurrences = countAllWords(matrix, ROWS, COLS, words, wordCount);
-    printf("Total occurrences of all words: %d\n", totalOccurrences);
 
     return 0;
 }

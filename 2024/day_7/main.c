@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#define MAX_NUMBERS 1000
+#define MAX_NUMBERS 100
 #define MAX_BUFFER 1000
 
 unsigned long long find_combinations(
@@ -24,9 +24,9 @@ unsigned long long find_combinations(
     // Option 1: Add the current number to the current value
     unsigned long long result = find_combinations(
             numbers,
-            num_count,
             target,
             current_value + current_number,
+            num_count,
             index + 1
             );
 
@@ -35,10 +35,11 @@ unsigned long long find_combinations(
     }
 
     // Option 2: Multiply the current number with the current value
-    result = find_combinations(numbers,
-            num_count,
+    result = find_combinations(
+            numbers,
             target,
             current_value * current_number,
+            num_count,
             index + 1
             );
 
@@ -85,7 +86,8 @@ int main() {
             numbers[num_count++] = num;
         }
 
-        sum += find_combinations(numbers, num_count, numbers[0], 0, 1);
+        sum += find_combinations(numbers, numbers[0], 0, num_count, 1);
+
 
         // Clear go next line
         num_count = 0;
